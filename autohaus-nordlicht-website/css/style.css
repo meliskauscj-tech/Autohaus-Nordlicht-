@@ -1,0 +1,248 @@
+/* Autohaus Nordlicht – Stylesheet */
+
+/* ---------- Schriften (lokal eingebunden, DSGVO-freundlich) ---------- */
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: normal; font-display: swap; src: url("../fonts/montserrat-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/montserrat-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-style: normal; font-display: swap; src: url("../fonts/montserrat-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 600; font-style: normal; font-display: swap; src: url("../fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/source-sans-3-latin-700-normal.woff2") format("woff2"); }
+
+/* ---------- Farben & Grundwerte ---------- */
+:root {
+  --navy: #0E3A6E;
+  --navy-deep: #0A2A50;
+  --sky: #5BA8E0;
+  --sky-soft: #7BBCEA;
+  --ice: #F3F7FB;
+  --chip: #E4F0FA;
+  --text: #142235;
+  --muted: #44546A;
+  --on-dark: #DCE7F3;
+  --line: #D5DEE8;
+  --field: #A9B7C8;
+  --radius: 16px;
+  --font-head: "Montserrat", "Helvetica Neue", Helvetica, sans-serif;
+  --font-body: "Source Sans 3", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: #fff;
+}
+
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--font-head); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--navy); }
+a:hover { color: #2F7FC0; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 4px; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.skip-link {
+  position: absolute; left: 16px; top: -60px; z-index: 100;
+  background: var(--navy); color: #fff; padding: 10px 16px; border-radius: 8px;
+}
+.skip-link:focus { top: 12px; }
+
+.eyebrow {
+  font-family: var(--font-head); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #2F7FC0;
+}
+.on-dark .eyebrow { color: var(--sky-soft); }
+
+.section-title { font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.15; font-weight: 800; color: var(--navy); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 12px 24px; border-radius: 8px;
+  font-family: var(--font-head); font-size: 16px; font-weight: 700;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  transition: background-color .15s, color .15s;
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-deep); color: #fff; }
+.btn-sky { background: var(--sky); color: var(--navy-deep); }
+.btn-sky:hover { background: var(--sky-soft); color: var(--navy-deep); }
+.btn-outline { border-color: #fff; color: #fff; }
+.btn-outline:hover { background: #fff; color: var(--navy); }
+.btn-white { background: #fff; color: var(--navy); }
+.btn-white:hover { background: var(--chip); color: var(--navy); }
+
+/* ---------- Kopfzeile ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: #fff; border-bottom: 1px solid #E1E8F0;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding-top: 10px; padding-bottom: 10px;
+}
+.brand img { width: 120px; height: auto; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a:not(.btn) {
+  font-family: var(--font-head); font-size: 15px; font-weight: 600;
+  text-decoration: none; padding: 10px 0;
+}
+.nav-toggle {
+  display: none; width: 48px; height: 48px; border: 0; border-radius: 8px;
+  background: var(--ice); color: var(--navy); cursor: pointer;
+  align-items: center; justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .nav-toggle { display: inline-flex; }
+  .nav {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: #fff; border-bottom: 1px solid #E1E8F0;
+    padding: 8px 24px 20px; display: none;
+  }
+  .nav.is-open { display: flex; }
+  .nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid #EEF2F6; }
+  .nav .btn { margin-top: 14px; }
+  .brand img { width: 96px; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; background: var(--navy); color: #fff; }
+.hero-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-inner {
+  position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 48px;
+  padding-top: 96px; padding-bottom: 150px;
+}
+.hero-text { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.hero h1 { font-size: clamp(2.5rem, 4.6vw, 4.25rem); line-height: 1.05; font-weight: 800; }
+.hero-lead { max-width: 34rem; font-size: 20px; color: var(--on-dark); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+
+.booking {
+  flex: 0 1 380px; min-width: 0;
+  background: #fff; color: var(--text); border-radius: var(--radius);
+  padding: 28px; display: flex; flex-direction: column; gap: 16px;
+}
+.booking h2 { font-size: 22px; font-weight: 800; color: var(--navy); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 15px; font-weight: 600; }
+.field input, .field select {
+  height: 48px; padding: 0 14px; border: 1px solid var(--field); border-radius: 8px;
+  font: inherit; color: var(--text); background: #fff;
+}
+.booking .btn { width: 100%; min-height: 52px; }
+.form-note { font-size: 14px; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .hero-inner { padding-top: 56px; padding-bottom: 110px; }
+}
+
+/* ---------- Leistungen ---------- */
+.services { padding: 72px 0 96px; }
+.section-head { display: flex; flex-direction: column; gap: 10px; max-width: 40rem; margin-bottom: 40px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.service {
+  background: var(--ice); border-radius: var(--radius); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.service h3 { font-size: 20px; font-weight: 800; color: var(--navy); }
+.service p { color: var(--muted); }
+
+/* ---------- Aktion ---------- */
+.promo-section { background: var(--ice); padding: 96px 0; }
+.promo {
+  background: var(--navy); color: #fff; border-radius: 24px; padding: 56px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 40px;
+}
+.promo-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.promo h2 { font-size: clamp(2rem, 3.4vw, 3.25rem); line-height: 1.1; font-weight: 800; }
+.checklist {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px;
+}
+.checklist li { display: flex; align-items: center; gap: 10px; }
+.promo-period { font-size: 15px; color: var(--on-dark); }
+.promo-side { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.price {
+  width: 190px; height: 190px; border-radius: 50%;
+  background: var(--sky); color: var(--navy-deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+}
+.price-small { font-size: 16px; font-weight: 700; }
+.price-big { font-size: 50px; line-height: 1.05; font-weight: 800; }
+.price-note { font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+
+@media (max-width: 600px) {
+  .promo { padding: 32px 24px; }
+  .checklist { grid-template-columns: 1fr; }
+  .promo-side { width: 100%; }
+}
+
+/* ---------- Karriere ---------- */
+.careers { padding: 96px 0; }
+.careers-head {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 40px;
+}
+.careers-head > div { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.careers-head p { max-width: 36rem; color: var(--muted); }
+.job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.job {
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.job h3 { font-size: 20px; line-height: 1.3; font-weight: 800; color: var(--navy); }
+.job p { color: var(--muted); flex-grow: 1; }
+.job a { font-family: var(--font-head); font-size: 15px; font-weight: 700; padding: 8px 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  background: var(--chip); color: var(--navy); padding: 4px 10px; border-radius: 999px;
+  font-size: 13px; font-weight: 700;
+}
+.job-cta { background: var(--navy); color: #fff; border-color: var(--navy); }
+.job-cta h3 { color: #fff; }
+.job-cta p { color: var(--on-dark); }
+.job-cta .btn { align-self: flex-start; }
+
+/* ---------- Kontakt ---------- */
+.contact { background: var(--ice); padding: 96px 0; }
+.contact-inner { display: flex; flex-wrap: wrap; gap: 40px; }
+.contact-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.contact-grid h3 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.contact-grid address { font-style: normal; }
+.map {
+  flex: 1 1 420px; min-width: 0; min-height: 300px;
+  border-radius: var(--radius); border: 2px dashed var(--field);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 24px; text-align: center; color: var(--muted); font-weight: 600;
+}
+
+/* ---------- Fußzeile ---------- */
+.site-footer { background: var(--navy-deep); color: var(--on-dark); }
+.footer-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 24px; padding-top: 40px; padding-bottom: 40px;
+}
+.footer-logo { background: #fff; border-radius: 12px; padding: 8px 12px; }
+.footer-logo img { width: 96px; height: auto; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; }
+.footer-nav a { color: var(--on-dark); padding: 8px 0; }
+.footer-nav a:hover { color: #fff; }
+.copyright { font-size: 14px; }
+
+/* ---------- Unterseiten (Impressum, Datenschutz) ---------- */
+.legal { padding: 72px 0 96px; }
+.legal .container { max-width: 760px; }
+.legal h1 { font-size: clamp(2rem, 3vw, 2.75rem); color: var(--navy); margin-bottom: 24px; }
+.legal h2 { font-size: 20px; color: var(--navy); margin: 32px 0 8px; }
+.legal p { margin-bottom: 12px; }
